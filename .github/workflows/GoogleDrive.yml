@@ -14,7 +14,7 @@ jobs:
         uses: playeveryware/action-google-access-token@v1
         with:
           credentials: ${{ secrets.YOUR_SERVICE_ACCOUNT_CREDENTIALS }}
-          scope: 'https://www.googleapis.com/auth/drive.readonly'
+          scope: 'https://drive.google.com/drive/folders/1AOZRyAV1FRSkfBMuvc52McccUJqjgbZF?dmr=1&ec=wgc-drive-globalnav-goto'
       - name: Download file
         uses: pew-actions/google-drive-download@v1
         with:
