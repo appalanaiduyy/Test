@@ -1,23 +1,25 @@
-name: Download Google Drive File
-
+name: Download from Google Drive
 on:
-  workflow_dispatch:
   push:
     branches:
       - main
-
 jobs:
   download:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v3
-
-      - name: Download Google Drive file
-        uses: actions/download-artifact@v3
+      - name: Acquire Google access token
+        id: google-access-token
+        uses: playeveryware/action-google-access-token@v1
         with:
-          name: NCResults
+          credentials: ${{ secrets.YOUR_SERVICE_ACCOUNT_CREDENTIALS }}
+          scope: 'https://www.googleapis.com/auth/drive.readonly'
+      - name: Download file
+        uses: pew-actions/google-drive-download@v1
+        with:
+          token: ${{ steps.google-access-token.outputs.token }}
+          file-id: 1AOZRyAV1FRSkfBMuvc52McccUJqjgbZF
           path: ./files
-          google_drive_key: ${{ secrets.GOOGLE_DRIVE_KEY }}
-          google_drive_id: ${{ secrets.GOOGLE_DRIVE_ID }}
+      - name: Show file information
+        run: ls ./files
