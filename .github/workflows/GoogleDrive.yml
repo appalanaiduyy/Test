@@ -12,12 +12,12 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Download Google Drive file
         uses: actions/download-artifact@v3
         with:
-          name: TestResults
+          name: NCResults
           path: ./files
           google_drive_key: ${{ secrets.GOOGLE_DRIVE_KEY }}
           google_drive_id: ${{ secrets.GOOGLE_DRIVE_ID }}
